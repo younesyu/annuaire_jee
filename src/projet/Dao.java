@@ -1,7 +1,6 @@
 package projet;
 
 import java.util.Collection;
-
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceContextType;
@@ -42,5 +41,16 @@ public class Dao implements IDao {
 	public <T> Collection<T> findAll(Class<T> clazz) {
 		TypedQuery<T> q = em.createQuery("select r from " + clazz.getSimpleName() + " r", clazz);
 		return q.getResultList();
+	}
+
+	public <T> Collection<T> findByName(String name, Class<T> clazz) {
+		try {
+			TypedQuery<T> q = em.createNamedQuery(clazz.getSimpleName() + ".findByName", clazz);
+			q.setParameter("name", name + "%");
+			return q.getResultList();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 }

@@ -12,4 +12,6 @@ public interface IDao {
 	public <T> void remove(Class<T> clazz, Object pk);
 
 	public <T> Collection<T> findAll(Class<T> clazz);
+	
+	public <T> Collection<T> findByName(String name, Class<T> clazz);
 }

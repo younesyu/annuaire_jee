@@ -36,11 +36,19 @@ public class TestDao {
 		Assert.assertEquals(g2.getId(), dao.find(Group.class, g2.getId()).getId());
 		List<Person> persons = new ArrayList<Person>(dao.findAll(Person.class));
 		for (Person person : persons) {
-			System.out.println(person);
+			System.err.println(person);
 		}
 		List<Group> groups = new ArrayList<Group>(dao.findAll(Group.class));
 		for (Group group : groups) {
-			System.out.println(group);
+			System.err.println(group);
+		}
+		groups = new ArrayList<Group>(dao.findByName("group2", Group.class));
+		for (Group group : groups) {
+			System.err.println(group);
+		}
+		persons = new ArrayList<Person>(dao.findByName("nom1", Person.class));
+		for (Person person : persons) {
+			System.err.println(person);
 		}
 	}
 }

@@ -10,10 +10,18 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-@Entity
+@NamedQueries({
+    @NamedQuery(name = "Person.findByName", query = "Select p From Person p Where p.lastname LIKE :name")
+})
+
+@Entity(name = "Person")
+@Table(name = "TPerson")
 public class Person implements Serializable {
 
 	// default serial UID
@@ -50,7 +58,7 @@ public class Person implements Serializable {
 		super();
 	}
 
-	public Person(String firstname, String lastname) {
+	public Person(String lastname, String firstname) {
 		super();
 		this.firstname = firstname;
 		this.lastname = lastname;

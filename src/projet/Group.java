@@ -6,8 +6,11 @@ import java.util.Set;
 
 import javax.persistence.*;
 
-@Entity(name = "Group")
+@NamedQueries({
+    @NamedQuery(name = "Group.findByName", query = "Select g From Group g Where g.name LIKE :name")
+})
 
+@Entity(name = "Group")
 @Table(name = "TGroup")
 public class Group implements Serializable {
 

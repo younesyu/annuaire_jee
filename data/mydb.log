@@ -1,31 +1,29 @@
-/*C12*/SET SCHEMA PUBLIC
-DISCONNECT
 /*C13*/SET SCHEMA PUBLIC
-\u000a    drop table Person if exists
-\u000a    drop table TGroup if exists
-\u000a    drop sequence hibernate_sequence if exists
 DISCONNECT
 /*C14*/SET SCHEMA PUBLIC
-create sequence hibernate_sequence start with 1 increment by 1
-\u000a    create table Person (\u000a        id bigint not null,\u000a        birth_day date,\u000a        firstname varchar(150) not null,\u000a        lastname varchar(150) not null,\u000a        mail varchar(200) not null,\u000a        password varchar(255),\u000a        website varchar(200) not null,\u000a        groupId bigint,\u000a        primary key (id)\u000a    )
-\u000a    create table TGroup (\u000a        id bigint not null,\u000a        name varchar(200) not null,\u000a        version bigint not null,\u000a        primary key (id)\u000a    )
-\u000a    alter table TGroup \u000a        add constraint UK_m1wcn2iqesg9auerrbk26nnp8 unique (name)
-\u000a    alter table Person \u000a        add constraint FKtmwibivesyds8yjctsfnmu8x0 \u000a        foreign key (groupId) \u000a        references TGroup
+\u000a    drop table TGroup if exists
+\u000a    drop table TPerson if exists
+\u000a    drop sequence hibernate_sequence if exists
 DISCONNECT
 /*C15*/SET SCHEMA PUBLIC
+create sequence hibernate_sequence start with 1 increment by 1
+\u000a    create table TGroup (\u000a        id bigint not null,\u000a        name varchar(200) not null,\u000a        version bigint not null,\u000a        primary key (id)\u000a    )
+\u000a    create table TPerson (\u000a        id bigint not null,\u000a        birth_day date,\u000a        firstname varchar(150) not null,\u000a        lastname varchar(150) not null,\u000a        mail varchar(200) not null,\u000a        password varchar(255),\u000a        website varchar(200) not null,\u000a        groupId bigint,\u000a        primary key (id)\u000a    )
+\u000a    alter table TGroup \u000a        add constraint UK_m1wcn2iqesg9auerrbk26nnp8 unique (name)
+\u000a    alter table TPerson \u000a        add constraint FKgex37vvv3eedq35unin353q8g \u000a        foreign key (groupId) \u000a        references TGroup
+DISCONNECT
+/*C16*/SET SCHEMA PUBLIC
 INSERT INTO TGROUP VALUES(1,'group1',0)
-INSERT INTO PERSON VALUES(2,'2019-04-28','nom1','prenom1','mail',NULL,'site',1)
+INSERT INTO TPERSON VALUES(2,'2019-05-03','prenom1','nom1','mail',NULL,'site',1)
 ALTER SEQUENCE PUBLIC.HIBERNATE_SEQUENCE RESTART WITH 3
 COMMIT
 DISCONNECT
-/*C16*/SET SCHEMA PUBLIC
+/*C17*/SET SCHEMA PUBLIC
 INSERT INTO TGROUP VALUES(3,'group2',0)
-INSERT INTO PERSON VALUES(4,'2019-04-28','nom3','prenom3','mail',NULL,'site',3)
-INSERT INTO PERSON VALUES(5,'2019-04-28','nom2','prenom2','mail',NULL,'site',3)
+INSERT INTO TPERSON VALUES(4,'2019-05-03','prenom3','nom3','mail',NULL,'site',3)
+INSERT INTO TPERSON VALUES(5,'2019-05-03','prenom2','nom2','mail',NULL,'site',3)
 ALTER SEQUENCE PUBLIC.HIBERNATE_SEQUENCE RESTART WITH 6
 COMMIT
-DISCONNECT
-/*C17*/SET SCHEMA PUBLIC
 DISCONNECT
 /*C18*/SET SCHEMA PUBLIC
 DISCONNECT
@@ -34,8 +32,14 @@ DISCONNECT
 /*C20*/SET SCHEMA PUBLIC
 DISCONNECT
 /*C21*/SET SCHEMA PUBLIC
-\u000a    alter table Person \u000a        drop constraint FKtmwibivesyds8yjctsfnmu8x0
-\u000a    drop table Person if exists
+DISCONNECT
+/*C22*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C23*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C24*/SET SCHEMA PUBLIC
+\u000a    alter table TPerson \u000a        drop constraint FKgex37vvv3eedq35unin353q8g
 \u000a    drop table TGroup if exists
+\u000a    drop table TPerson if exists
 \u000a    drop sequence hibernate_sequence if exists
 DISCONNECT
