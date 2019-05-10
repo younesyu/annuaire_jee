@@ -1,4 +1,4 @@
-package projet;
+package dao;
 
 import java.util.Collection;
 import javax.persistence.EntityManager;
